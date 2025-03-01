@@ -1,0 +1,23 @@
+name: Security Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check for API keys
+      run: |
+        if grep -r "sk-[a-zA-Z0-9]" --include="*.py" .; then
+          echo "Found potential OpenAI API key in code!"
+          exit 1
+        fi
+        if grep -r "pplx-[a-zA-Z0-9]" --include="*.py" .; then
+          echo "Found potential Perplexity API key in code!"
+          exit 1
+        fi 
