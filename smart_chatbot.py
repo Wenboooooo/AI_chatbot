@@ -2,11 +2,18 @@ import os
 import requests
 import json
 from typing import Optional, Dict, Any
+from dotenv import load_dotenv
+
+# 加载环境变量
+load_dotenv()
+
+# 从环境变量获取 API 密钥
+api_key = os.getenv("OPENAI_API_KEY")
 
 class SmartChatbot:
     def __init__(self):
         # Initialize API keys
-        self.gpt4_api_key = "sk-proj-Rl41N05dYzhdjkHneWI2T3BlbkFJXf1SmQ7Nth4wHBCgzHjO"
+        self.gpt4_api_key = api_key
         self.perplexity_api_key = "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"
         
         # API endpoints
